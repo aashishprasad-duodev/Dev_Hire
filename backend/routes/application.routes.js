@@ -13,4 +13,5 @@ router.patch("/:id/status",authMiddleware,authorizeRole("recruiter") ,Applicatio
 router.get("/my",authMiddleware,authorizeRole("jobseeker") ,ApplicationController.getMyApplications);
 router.get("/all",authMiddleware,authorizeRole("recruiter") ,ApplicationController.getRecruiterApplications);
 router.post("/upload", authMiddleware, authorizeRole("jobseeker"), uploadMiddleware.single("resume"), ApplicationController.uploadResume);
+router.get("/download/:id", authMiddleware, authorizeRole("recruiter"), ApplicationController.downloadResume);
 module.exports = router;

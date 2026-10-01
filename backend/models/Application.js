@@ -5,38 +5,33 @@ const applicationSchema = new mongoose.Schema(
         jobseekerId: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User",
-            required: true
+            required: true,
         },
 
         jobId: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Job",
-            required: true
+            required: true,
         },
 
         status: {
             type: String,
-            enum: [
-                "applied",
-                "pending",
-                "interview",
-                "completed",
-                "rejected"
-            ],
+            enum: ["applied", "pending", "interview", "completed", "rejected"],
             default: "applied",
-            trim: true
-        }
+            trim: true,
+        },
+        resume: {
+            type: String,
+            default: null,
+        },
     },
     {
-        timestamps: true
-    }
+        timestamps: true,
+    },
 );
 
 // One jobseeker can apply to a particular job only once
-applicationSchema.index(
-    { jobseekerId: 1, jobId: 1 },
-    { unique: true }
-);
+applicationSchema.index({ jobseekerId: 1, jobId: 1 }, { unique: true });
 
 const Application = mongoose.model("Application", applicationSchema);
 
